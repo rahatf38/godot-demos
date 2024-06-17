@@ -1,0 +1,168 @@
+[gd_scene load_steps=14 format=3 uid="uid://d0jf28hxpw8ox"]
+
+[ext_resource type="Texture2D" uid="uid://bnsnpnjpsvrp0" path="res://textures/brick_wall_02_diff_1k.png" id="1_71sap"]
+[ext_resource type="Shader" path="res://posterization.gdshader" id="1_a6bgi"]
+[ext_resource type="Shader" path="res://dithering.gdshader" id="2_1bjm6"]
+[ext_resource type="Texture2D" uid="uid://bergy7k5x1gaw" path="res://textures/brick_wall_02_nor_gl_1k.png" id="2_fait4"]
+[ext_resource type="Texture2D" uid="uid://sxj7wya4ply7" path="res://textures/brick_wall_02_rough_1k.png" id="3_pykko"]
+[ext_resource type="Script" path="res://rotate.gd" id="3_y5ey4"]
+[ext_resource type="Script" path="res://light toggle and quit.gd" id="6_a2gyw"]
+
+[sub_resource type="Environment" id="Environment_xoop7"]
+background_mode = 1
+adjustment_enabled = true
+adjustment_brightness = 1.14
+adjustment_contrast = 1.28
+adjustment_saturation = 1.76
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y5xe3"]
+shader = ExtResource("1_a6bgi")
+shader_parameter/SCREEN_WIDTH = 320.0
+shader_parameter/RED_COMPONENT = 8.0
+shader_parameter/GREEN_COMPONENT = 8.0
+shader_parameter/BLUE_COMPONENT = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_anucw"]
+shader = ExtResource("2_1bjm6")
+shader_parameter/SCREEN_WIDTH = 320.0
+shader_parameter/COLOR_FACTOR = 4.0
+shader_parameter/DITHERING_STRENTH = 0.005
+
+[sub_resource type="Shader" id="Shader_3c4e3"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.2.2.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix,depth_draw_opaque,cull_back,diffuse_burley,specular_schlick_ggx;
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color,filter_linear_mipmap,repeat_enable;
+uniform float point_size : hint_range(0,128);
+uniform float roughness : hint_range(0,1);
+uniform sampler2D texture_metallic : hint_default_white,filter_linear_mipmap,repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r,filter_linear_mipmap,repeat_enable;
+uniform float specular;
+uniform float metallic;
+uniform sampler2D texture_normal : hint_roughness_normal,filter_linear_mipmap,repeat_enable;
+uniform float normal_scale : hint_range(-16,16);
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+
+void vertex() {
+	UV=UV*uv1_scale.xy+uv1_offset.xy;
+}
+
+
+
+
+
+
+void fragment() {
+	vec2 base_uv = UV;
+	vec4 albedo_tex = texture(texture_albedo,base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+	float metallic_tex = dot(texture(texture_metallic,base_uv),metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	vec4 roughness_texture_channel = vec4(1.0,0.0,0.0,0.0);
+	float roughness_tex = dot(texture(texture_roughness,base_uv),roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+	SPECULAR = specular;
+	NORMAL_MAP = texture(texture_normal,base_uv).rgb;
+	NORMAL_MAP_DEPTH = normal_scale;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a315n"]
+render_priority = 0
+shader = SubResource("Shader_3c4e3")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 0.33
+shader_parameter/metallic_texture_channel = null
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/normal_scale = 1.0
+shader_parameter/uv1_scale = Vector3(4, 3, 2)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+shader_parameter/texture_albedo = ExtResource("1_71sap")
+shader_parameter/texture_roughness = ExtResource("3_pykko")
+shader_parameter/texture_normal = ExtResource("2_fait4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_d4i7q"]
+material = SubResource("ShaderMaterial_a315n")
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_xoop7")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34059, 3.20081)
+
+[node name="postproccess" type="Node" parent="Camera3D"]
+
+[node name="Control" type="Control" parent="Camera3D/postproccess"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Camera3D/postproccess/Control"]
+position = Vector2(575.5, 323)
+scale = Vector2(5.855, 3.24)
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/postproccess/Control/BackBufferCopy"]
+material = SubResource("ShaderMaterial_y5xe3")
+offset_left = -99.0
+offset_top = -100.0
+offset_right = 112.0
+offset_bottom = 117.0
+
+[node name="Control2" type="Control" parent="Camera3D/postproccess"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="Camera3D/postproccess/Control2"]
+position = Vector2(575.5, 323)
+scale = Vector2(5.855, 3.24)
+copy_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Camera3D/postproccess/Control2/BackBufferCopy"]
+material = SubResource("ShaderMaterial_anucw")
+offset_left = -99.0
+offset_top = -100.0
+offset_right = 112.0
+offset_bottom = 117.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.50404, 0, 0, 0, 1, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("PlaneMesh_d4i7q")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.50404, 0, 0, 0, -4.37114e-08, -5.59116, 0, 1, -2.44397e-07, 0, 0, 0)
+mesh = SubResource("PlaneMesh_d4i7q")
+
+[node name="light handle" type="Node" parent="." node_paths=PackedStringArray("moving_light", "stat_light")]
+script = ExtResource("6_a2gyw")
+moving_light = NodePath("SpotLight3D")
+stat_light = NodePath("OmniLight3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="light handle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.56524, 1.55127, 0.552729)
+omni_range = 2.333
+
+[node name="SpotLight3D" type="SpotLight3D" parent="light handle"]
+transform = Transform3D(0.834351, 0.0709019, -0.546655, -0.0470284, 0.997234, 0.057564, 0.549224, -0.0223202, 0.835377, -2.41573, 1.6116, 3.04587)
+light_energy = 1.4
+spot_range = 6.3561
+spot_angle = 41.36
+script = ExtResource("3_y5ey4")
+min_angle = -30
+speed = 1.9

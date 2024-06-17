@@ -1,0 +1,59 @@
+[gd_scene load_steps=5 format=3 uid="uid://djrw4tw45odge"]
+
+[ext_resource type="Script" path="res://menu handle.gd" id="1_4bdcy"]
+[ext_resource type="FontFile" uid="uid://cxsl4m2bi2dtv" path="res://AveriaSerif-Bold.ttf" id="1_oklkr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xi3yx"]
+font = ExtResource("1_oklkr")
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hg71"]
+font = ExtResource("1_oklkr")
+font_size = 66
+
+[node name="start" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 960.0
+offset_bottom = 540.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4bdcy")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = -98.5
+offset_right = 160.0
+offset_bottom = 98.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "ESC to quit
+1 to toggle left light
+2 to toggle right light
+3 to pause left light
+Enter to start"
+label_settings = SubResource("LabelSettings_xi3yx")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -172.5
+offset_top = 86.0
+offset_right = 172.5
+offset_bottom = 161.0
+grow_horizontal = 2
+text = "Shader test"
+label_settings = SubResource("LabelSettings_2hg71")

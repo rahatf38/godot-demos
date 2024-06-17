@@ -1,0 +1,488 @@
+[gd_scene load_steps=30 format=3 uid="uid://bjjceeyq3csc3"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_ykx10"]
+[ext_resource type="Shader" path="res://scripts/sky.gdshader" id="2_8w000"]
+[ext_resource type="Texture2D" uid="uid://bqkir5pbau04d" path="res://textures/stars.png" id="3_fjmbx"]
+[ext_resource type="Script" path="res://scripts/ui_script.gd" id="4_0avc0"]
+[ext_resource type="Texture2D" uid="uid://lqxyt68yloxi" path="res://textures/prototype_512x512_grey4.png" id="5_v38ov"]
+[ext_resource type="Script" path="res://addons/ultimate_character/ucharacterbody3d.gd" id="6_nm3b5"]
+[ext_resource type="Script" path="res://scripts/input_handler.gd" id="7_sxbhp"]
+[ext_resource type="Script" path="res://scripts/cameraswitch.gd" id="8_80vip"]
+[ext_resource type="AudioStream" uid="uid://bou6jq5ojobqg" path="res://utomp3.com - Time is about to speed upJoJo Animation.mp3" id="8_njhop"]
+[ext_resource type="Texture2D" uid="uid://cjjhk26xck17f" path="res://textures/800px-Pucci_New_Moon_Infobox_Manga.png" id="9_c6j1v"]
+[ext_resource type="Texture2D" uid="uid://dd1404aanud1k" path="res://textures/400px-Made_in_Heaven_Infobox_Anime.png" id="10_1kwpq"]
+[ext_resource type="AudioStream" uid="uid://bvc8nhxhwsbhd" path="res://378874__kijjaz__20170101-electrical-cutout-box-switch-on-and-off.mp3" id="10_nyq6t"]
+[ext_resource type="Script" path="res://scripts/CharacterBody3D.gd" id="13_xndr0"]
+
+[sub_resource type="Animation" id="Animation_2gckx"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:time_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0.01, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("UCharacterBody3D/music:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UCharacterBody3D/horse:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.550217, 1.76214, 3.70523)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UCharacterBody3D/horse:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UCharacterBody3D/horse/OmniLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UCharacterBody3D/horse/OmniLight3D:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [6.495]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("block/ColorRect:color")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("UCharacterBody3D/switch:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7iew7"]
+resource_name = "speedup"
+length = 40.991
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:time_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0, 9, -0.25, 0, 0.25, 0, 22, -0.25, 0, 0.25, 0, 30, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 5.4, 9.5, 33.3, 35.9)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = false
+tracks/1/path = NodePath("UCharacterBody3D/music:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("UCharacterBody3D/horse:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.2, 3.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(2.55585, 1.76214, -0.0327692), Vector3(3.01078, 1.76214, -1.09447), Vector3(0.00117301, 1.76214, -2.53502)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("UCharacterBody3D/horse:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 5, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("UCharacterBody3D/horse/OmniLight3D:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 7.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("UCharacterBody3D/horse/OmniLight3D:light_energy")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(5, 7.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [6.495, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("block/ColorRect:color")
+tracks/6/interp = 0
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 39),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("UCharacterBody3D/switch:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(39),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kqegx"]
+_data = {
+"RESET": SubResource("Animation_2gckx"),
+"speedup": SubResource("Animation_7iew7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_msgkm"]
+shader = ExtResource("2_8w000")
+shader_parameter/day_top_color = Color(0.1, 0.6, 1, 1)
+shader_parameter/day_bottom_color = Color(0.4, 0.8, 1, 1)
+shader_parameter/sunset_top_color = Color(0.7, 0.75, 1, 1)
+shader_parameter/sunset_bottom_color = Color(1, 0.5, 0.7, 1)
+shader_parameter/night_top_color = Color(0.02, 0, 0.04, 1)
+shader_parameter/night_bottom_color = Color(0.1, 0, 0.2, 1)
+shader_parameter/horizon_color = Color(0, 0.7, 0.8, 1)
+shader_parameter/horizon_blur = 0.05
+shader_parameter/sun_color = Color(10, 8, 1, 1)
+shader_parameter/sun_sunset_color = Color(10, 0, 0, 1)
+shader_parameter/sun_size = 0.2
+shader_parameter/sun_blur = 10.0
+shader_parameter/moon_color = Color(1, 0.95, 0.7, 1)
+shader_parameter/moon_size = 0.06
+shader_parameter/moon_blur = 0.1
+shader_parameter/clouds_edge_color = Color(0.8, 0.8, 0.98, 1)
+shader_parameter/clouds_top_color = Color(1, 1, 1, 1)
+shader_parameter/clouds_middle_color = Color(0.92, 0.92, 0.98, 1)
+shader_parameter/clouds_bottom_color = Color(0.83, 0.83, 0.94, 1)
+shader_parameter/clouds_speed = 0.77
+shader_parameter/clouds_direction = 0.2
+shader_parameter/clouds_scale = 1.0
+shader_parameter/clouds_cutoff = 0.3
+shader_parameter/clouds_fuzziness = 0.5
+shader_parameter/clouds_weight = 0.0
+shader_parameter/clouds_blur = 0.25
+shader_parameter/stars_speed = 1.0
+shader_parameter/stars_scale = 1.0
+shader_parameter/stars_opacity = 1.0
+shader_parameter/stars_texture = ExtResource("3_fjmbx")
+shader_parameter/overwritten_time = 3000.0
+
+[sub_resource type="Sky" id="Sky_q13r3"]
+sky_material = SubResource("ShaderMaterial_msgkm")
+
+[sub_resource type="Environment" id="Environment_bh1jy"]
+background_mode = 2
+sky = SubResource("Sky_q13r3")
+ambient_light_source = 3
+
+[sub_resource type="LabelSettings" id="LabelSettings_2etec"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ynih"]
+font_size = 40
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8pqky"]
+albedo_texture = ExtResource("5_v38ov")
+uv1_scale = Vector3(255, 255, 255)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yt5ij"]
+material = SubResource("StandardMaterial3D_8pqky")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_sfrs8"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3o6t3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ji8m0"]
+height = 1.3
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pump4"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_vkam8"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dns0t"]
+
+[node name="Main" type="Node3D"]
+script = ExtResource("1_ykx10")
+day_time = 6.0
+use_day_time_for_shader = true
+sun_base_enegry = 1.0
+moon_base_enegry = 0.1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_kqegx")
+}
+autoplay = "RESET"
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_bh1jy")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.920763, 0, -0.390123, 0, 1, 0, 0.390123, 0, 0.920763, 0, 0, 0)
+rotation_order = 4
+light_energy = 0.259259
+shadow_enabled = true
+shadow_opacity = 0.75
+shadow_blur = 5.0
+
+[node name="Moon" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.949426, 0, -0.313992, 0.30293, -0.263103, 0.915975, -0.0826123, -0.964768, -0.249796, 0, 0, 0)
+rotation_order = 4
+light_color = Color(1, 1, 0.6, 1)
+light_energy = 0.1
+shadow_enabled = true
+shadow_opacity = 0.25
+shadow_blur = 5.0
+directional_shadow_fade_start = 0.1
+
+[node name="ui" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ui_handler" type="Node" parent="ui"]
+script = ExtResource("4_0avc0")
+
+[node name="ProgressBar" type="ProgressBar" parent="ui/ui_handler"]
+visible = false
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -27.0
+grow_horizontal = 2
+grow_vertical = 0
+min_value = 0.01
+max_value = 30.0
+value = 0.01
+show_percentage = false
+
+[node name="fps_counter" type="Label" parent="ui/ui_handler"]
+offset_left = 10.0
+offset_right = 159.0
+offset_bottom = 23.0
+text = "XX FPS"
+label_settings = SubResource("LabelSettings_2etec")
+
+[node name="Label" type="Label" parent="ui/ui_handler"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -245.0
+offset_top = -213.0
+offset_right = 248.0
+offset_bottom = 190.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "W/A/S/D to move
+Space to jump
+Shift to run
+Ctrl or C to crouch
+1 for third person
+R to reset the universe
+ESC to quit
+Press F to close this menu
+Close this menu before resetting the universe"
+label_settings = SubResource("LabelSettings_3ynih")
+horizontal_alignment = 1
+
+[node name="ground" type="MeshInstance3D" parent="."]
+transform = Transform3D(-255, 0, 2.22928e-05, 0, 50, 0, -2.22928e-05, 0, -255, 0, 0, 0)
+cast_shadow = 0
+mesh = SubResource("PlaneMesh_yt5ij")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ground"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_sfrs8")
+
+[node name="UCharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+script = ExtResource("6_nm3b5")
+slide_speed = 21.0
+CUTSCENE_LENGHT = 4.5
+can_uni_reset = null
+
+[node name="input_handler" type="Node" parent="UCharacterBody3D" node_paths=PackedStringArray("horse")]
+script = ExtResource("7_sxbhp")
+horse = NodePath("../horse")
+
+[node name="CollisionShapeNormal" type="CollisionShape3D" parent="UCharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_3o6t3")
+
+[node name="CollisionShapeCrouch" type="CollisionShape3D" parent="UCharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+shape = SubResource("CapsuleShape3D_ji8m0")
+disabled = true
+
+[node name="Head" type="Node3D" parent="UCharacterBody3D" node_paths=PackedStringArray("pucci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.8, 0)
+script = ExtResource("8_80vip")
+pucci = NodePath("../pucci")
+
+[node name="Camera" type="Camera3D" parent="UCharacterBody3D/Head"]
+current = true
+fov = 90.0
+
+[node name="Camera3D" type="Camera3D" parent="UCharacterBody3D/Head"]
+transform = Transform3D(1, -2.35435e-08, -3.22988e-09, 2.35435e-08, 0.963055, 0.269306, -3.22988e-09, -0.269306, 0.963055, 2.4645e-07, 0.530061, 2.81906)
+fov = 90.0
+
+[node name="RayCast3D" type="RayCast3D" parent="UCharacterBody3D"]
+target_position = Vector3(0, 2, 0)
+
+[node name="music" type="AudioStreamPlayer3D" parent="UCharacterBody3D"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+stream = ExtResource("8_njhop")
+
+[node name="switch" type="AudioStreamPlayer3D" parent="UCharacterBody3D"]
+stream = ExtResource("10_nyq6t")
+
+[node name="pucci" type="Sprite3D" parent="UCharacterBody3D"]
+transform = Transform3D(0.172085, 0, 0, 0, 0.156096, 0, 0, 0, 0.5, 0, 1.04866, 0)
+shaded = true
+texture = ExtResource("9_c6j1v")
+
+[node name="horse" type="Sprite3D" parent="UCharacterBody3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0.550217, 1.76214, 3.70523)
+modulate = Color(1, 1, 1, 0)
+billboard = 1
+shaded = true
+texture = ExtResource("10_1kwpq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="UCharacterBody3D/horse"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.386142, 0.0752592)
+visible = false
+light_color = Color(0.819129, 0.724165, 0.851566, 1)
+light_energy = 6.495
+omni_range = 8.706
+omni_attenuation = 0.42045
+
+[node name="block" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="block"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.750747, 0)
+mesh = SubResource("PlaneMesh_pump4")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 5.06645)
+script = ExtResource("13_xndr0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_vkam8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_dns0t")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="UCharacterBody3D/input_handler" method="_on_animation_player_animation_finished"]
+[connection signal="menu_closed" from="ui/ui_handler" to="UCharacterBody3D/input_handler" method="_on_ui_handler_menu_closed"]
+[connection signal="in_cutscene_signal" from="UCharacterBody3D" to="UCharacterBody3D/Head" method="_on_u_character_body_3d_in_cutscene_signal"]
+[connection signal="sliding" from="UCharacterBody3D" to="UCharacterBody3D/input_handler" method="_on_u_character_body_3d_sliding"]
+[connection signal="uni_reset_signal" from="UCharacterBody3D/input_handler" to="UCharacterBody3D" method="_on_input_handler_uni_reset_signal"]
